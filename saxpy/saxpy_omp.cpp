@@ -25,9 +25,6 @@ public:
         reset();
       return time_span.count();
     }
-    double elapsed_sec(bool reset_timer=false) {
-      return elapsed(reset_timer);
-    }
 private:
     std::chrono::high_resolution_clock::time_point t0_;
 };
@@ -80,7 +77,7 @@ saxpy( N, AVAL, x, y );
 // Stop timer
 //clock_t watch = clock() - start;
 //const float clocktime = ((float)watch)/CLOCKS_PER_SEC;
-auto clocktime = timer.elapsed_sec();
+auto clocktime = timer.elapsed();
 
 // SAXPY verification
 const float err = verify_saxpy( tot, N, y);

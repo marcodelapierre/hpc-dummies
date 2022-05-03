@@ -1,0 +1,11 @@
+cmake_minimum_required (VERSION 3.10)
+project (Hello_Kokkos)
+
+set(Kokkos_DIR "$ENV{Kokkos_ROOT}" CACHE STRING "Kokkos root directory")
+find_package(Kokkos REQUIRED)
+
+add_executable(hello_kokkos.x hello_kokkos.cpp)
+target_link_libraries(hello_kokkos.x Kokkos::kokkos)
+
+add_executable(hello_kokkos_lambda.x hello_kokkos_lambda.cpp)
+target_link_libraries(hello_kokkos_lambda.x Kokkos::kokkos)

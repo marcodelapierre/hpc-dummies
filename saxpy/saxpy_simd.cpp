@@ -1,8 +1,7 @@
 #include <iostream>
 #include <cmath>
-#include <ctime>
 #include <chrono>
-#include <omp.h>
+#include <ctime>
 
 using namespace std;
 
@@ -33,7 +32,7 @@ private:
 float verify_saxpy( const float tot, const size_t n, const float* const y )
 {
   float err = 0;
-  #pragma omp parallel for
+  #pragma omp simd
   for (size_t i = 0; i < n; i++) {
     err += fabs( y[i] - tot );
   }
@@ -45,10 +44,10 @@ float verify_saxpy( const float tot, const size_t n, const float* const y )
 void saxpy( const size_t n, const float a, 
             const float* const x, float* const y )
 {
-    #pragma omp parallel for
-    for ( size_t i = 0; i < n; i++ ) {
-      y[i] = a * x[i] + y[i];
-    }
+  #pragma omp simd
+  for ( size_t i = 0; i < n; i++ ) {
+    y[i] = a * x[i] + y[i];
+  }
 }
 
 
@@ -65,7 +64,7 @@ const float tot = AVAL * XVAL + YVAL;
 float* x = new float [ N ];
 float* y = new float [ N ];
 // Fill values
-#pragma omp parallel for
+#pragma omp simd
 for ( size_t i = 0; i < N; i++ ) {
   x[i] = XVAL;
   y[i] = YVAL;

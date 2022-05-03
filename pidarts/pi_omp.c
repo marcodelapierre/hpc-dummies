@@ -1,7 +1,8 @@
 /* Compute pi using OpenMP */
 #include <omp.h>
 #include <stdio.h>
- 
+#include "my_timer.h"
+
 // Random number generator -- and not a very good one, either!
  
 static long MULTIPLIER = 1366;
@@ -27,6 +28,9 @@ int main(int argc, char **argv) {
   double pi, x, y;
   double r = 1.0; // radius of circle
   double r2 = r*r;
+
+  // Start timer
+  my_timer timer;
 #pragma omp parallel
 {
 #pragma omp for private(x,y) reduction(+:Ncirc)
@@ -40,10 +44,13 @@ int main(int argc, char **argv) {
       Ncirc++;
   }
 }
- 
+  // Get timer
+  double clocktime = (double)timer.elapsed();
+
   pi = 4.0 * ((double)Ncirc)/((double)num_trials);
   printf("\n \t Computing pi using OpenMP: \n");
   printf("\t For %ld trials, pi = %f\n", num_trials, pi);
+  printf("\t Time required [ms] = %f\n", clocktime*1000.);
   printf("\n");
  
   return 0;

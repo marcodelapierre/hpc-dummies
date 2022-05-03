@@ -23,10 +23,10 @@ float verify_saxpy( const float tot, const size_t n, const float* const y )
 void saxpy( const size_t n, const float a, 
             const float* const x, float* const y )
 {
-    #pragma omp parallel for
-    for ( size_t i = 0; i < n; i++ ) {
-      y[i] = a * x[i] + y[i];
-    }
+  #pragma omp parallel for
+  for ( size_t i = 0; i < n; i++ ) {
+    y[i] = a * x[i] + y[i];
+  }
 }
 
 
@@ -60,7 +60,7 @@ saxpy( N, AVAL, x, y );
 auto clocktime = timer.elapsed();
 
 // SAXPY verification
-const float err = verify_saxpy( tot, N, y);
+const float err = verify_saxpy( tot, N, y );
 
 // Print stuff
 cout << "N: " << N << "; ";

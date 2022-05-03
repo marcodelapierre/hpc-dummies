@@ -59,7 +59,7 @@ saxpy( N, AVAL, x, y );
 auto clocktime = timer.elapsed();
 
 // SAXPY verification
-const float err = verify_saxpy( tot, N, y);
+const float err = verify_saxpy( tot, N, y );
 
 // Print stuff
 cout << "N: " << N << "; ";

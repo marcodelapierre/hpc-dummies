@@ -18,6 +18,7 @@ float verify_saxpy( const float tot, const size_t n, const float* const y )
     err += fabs( y[i] - tot );
   }
   }
+
   return err;
 }
 
@@ -55,6 +56,7 @@ for ( size_t i = 0; i < N; i++ ) {
   x[i] = XVAL;
   y[i] = YVAL;
 }
+
 // Start timer
 //clock_t start = clock();
 my_timer timer;
@@ -72,7 +74,7 @@ my_timer timer;
 // Stop timer
 //clock_t watch = clock() - start;
 //const float clocktime = ((float)watch)/CLOCKS_PER_SEC;
-clocktime = timer.elapsed();
+clocktime = (float)timer.elapsed();
 
 // SAXPY verification
 err = verify_saxpy( tot, N, y );

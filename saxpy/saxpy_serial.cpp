@@ -39,6 +39,9 @@ const float tot = AVAL * XVAL + YVAL;
 // Allocate arrays
 float* x = new float [ N ];
 float* y = new float [ N ];
+// More definitions
+float clocktime, err;
+
 // Fill values
 for ( size_t i = 0; i < N; i++ ) {
   x[i] = XVAL;
@@ -53,10 +56,10 @@ saxpy( N, AVAL, x, y );
 // Stop timer
 //clock_t watch = clock() - start;
 //const float clocktime = ((float)watch)/CLOCKS_PER_SEC;
-auto clocktime = timer.elapsed();
+clocktime = (float)timer.elapsed();
 
 // SAXPY verification
-const float err = verify_saxpy( tot, N, y );
+err = verify_saxpy( tot, N, y );
 
 // Print stuff
 cout << "N: " << N << "; ";

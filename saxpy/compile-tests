@@ -1,3 +1,7 @@
+my_include=$(pwd)
+my_include=${my_include%/*}/include
+export CPATH="$my_include:$CPATH"
+
 g++-11 -fopt-info-vec-loop -o saxpy.x saxpy_serial.cpp 
 g++-11 -O2 -fopt-info-vec-loop -o saxpy_o2.x saxpy_serial.cpp 
 g++-11 -O2 -funroll-loops -fopt-info-vec-loop -o saxpy_o2_unroll.x saxpy_serial.cpp 

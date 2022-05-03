@@ -68,7 +68,7 @@ const size_t Nsize = N * sizeof(float);
 float *x, *y, *y_host;
 CUDA_ERROR_CHECK(cudaMalloc( (void**)&x, Nsize ));
 CUDA_ERROR_CHECK(cudaMalloc( (void**)&y, Nsize ));
-y_host = (float*)malloc(Nsize);
+CUDA_ERROR_CHECK(cudaMallocHost( (void**)&y_host, Nsize ));
 // More definitions
 float clocktime, err;
 clock_t start, watch;
@@ -99,7 +99,7 @@ err = verify_saxpy( tot, N, y_host );
 printf("N: %i; Err: %f; Clock[ms]: %f;\n", N, err, clocktime*1000.);
 
 // Deallocate arrays
-free(y_host);
+CUDA_ERROR_CHECK(cudaFreeHost( y_host ));
 CUDA_ERROR_CHECK(cudaFree( y ));
 CUDA_ERROR_CHECK(cudaFree( x ));
 

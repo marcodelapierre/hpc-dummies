@@ -68,7 +68,7 @@ const size_t Nsize = N * sizeof(float);
 float *x, *y, *y_host;
 HIP_ERROR_CHECK(hipMalloc( (void**)&x, Nsize ));
 HIP_ERROR_CHECK(hipMalloc( (void**)&y, Nsize ));
-y_host = (float*)malloc(Nsize);
+HIP_ERROR_CHECK(hipMallocHost( (void**)&y_host, Nsize ));
 // More definitions
 float clocktime, err;
 clock_t start, watch;
@@ -99,7 +99,7 @@ err = verify_saxpy( tot, N, y_host );
 printf("N: %i; Err: %f; Clock[ms]: %f;\n", N, err, clocktime*1000.);
 
 // Deallocate arrays
-free(y_host);
+HIP_ERROR_CHECK(hipFreeHost( y_host ));
 HIP_ERROR_CHECK(hipFree( y ));
 HIP_ERROR_CHECK(hipFree( x ));
 

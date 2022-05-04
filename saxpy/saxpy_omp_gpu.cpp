@@ -10,7 +10,7 @@ using namespace std;
 // Verify SAXPY result
 float verify_saxpy( const float tot, const size_t n, const float* const y )
 {
-  float err = 0;
+  float err = 0.;
   # pragma omp target data map(err)
   {
   #pragma omp target teams distribute parallel for

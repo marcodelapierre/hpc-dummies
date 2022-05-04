@@ -7,7 +7,7 @@
 // Verify SAXPY result
 float verify_saxpy( const float tot, const size_t n, const float* const y )
 {
-  float err = 0;
+  float err = 0.;
   for (size_t i = 0; i < n; i++) {
     err += fabs( y[i] - tot );
   }

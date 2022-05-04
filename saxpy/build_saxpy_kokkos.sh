@@ -33,4 +33,4 @@ cmake .. \
 make
 cp -p ${binary_name}*.x ..
 cd ..
-
+rm -rf build

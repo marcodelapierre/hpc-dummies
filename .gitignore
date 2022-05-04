@@ -1,4 +1,6 @@
 .vscode
 out*
 a.out
+b.out
 *.x
+More/

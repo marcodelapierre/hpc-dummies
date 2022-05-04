@@ -50,12 +50,7 @@
 struct hello_world {
   KOKKOS_INLINE_FUNCTION
   void operator()(const int i) const {
-    // FIXME_SYCL needs workaround for printf
-#ifndef __SYCL_DEVICE_ONLY__
     printf("Hello from i = %i\n", i);
-#else
-    (void)i;
-#endif
   }
 };
 

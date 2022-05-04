@@ -8,6 +8,5 @@ Small codes for HPC testing:
 * `misc/`: utilities
   * `cpuid`: get CPU ID
   * `xthi`: get task and thread affinities
-
-
+  * Kokkos installation scripts
 

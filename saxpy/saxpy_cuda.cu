@@ -77,7 +77,9 @@ const int gridDim = 4 * devprop.multiProcessorCount;
 const int blockDim = 8 * devprop.warpSize;
 // Fill values
 init_array<<< gridDim, blockDim >>>(N, XVAL, x);
+CUDA_ERROR_CHECK(cudaGetLastError());
 init_array<<< gridDim, blockDim >>>(N, YVAL, y);
+CUDA_ERROR_CHECK(cudaGetLastError());
 CUDA_ERROR_CHECK(cudaDeviceSynchronize());
 
 // Start timer
@@ -85,6 +87,7 @@ start = clock();
 
 // SAXPY
 saxpy<<< gridDim, blockDim >>>(N, AVAL, x, y);
+CUDA_ERROR_CHECK(cudaGetLastError());
 CUDA_ERROR_CHECK(cudaDeviceSynchronize());
 
 // Stop timer

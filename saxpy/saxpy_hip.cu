@@ -77,7 +77,9 @@ const int gridDim = 4 * devprop.multiProcessorCount;
 const int blockDim = 8 * devprop.warpSize;
 // Fill values
 hipLaunchKernelGGL(init_array, dim3(gridDim), dim3(blockDim ), 0, 0, N, XVAL, x);
+HIP_ERROR_CHECK(hipGetLastError());
 hipLaunchKernelGGL(init_array, dim3(gridDim), dim3(blockDim ), 0, 0, N, YVAL, y);
+HIP_ERROR_CHECK(hipGetLastError());
 HIP_ERROR_CHECK(hipDeviceSynchronize());
 
 // Start timer
@@ -85,6 +87,7 @@ start = clock();
 
 // SAXPY
 hipLaunchKernelGGL(saxpy, dim3(gridDim), dim3(blockDim ), 0, 0, N, AVAL, x, y);
+HIP_ERROR_CHECK(hipGetLastError());
 HIP_ERROR_CHECK(hipDeviceSynchronize());
 
 // Stop timer

@@ -5,18 +5,6 @@
 using namespace std;
 
 
-// Verify SAXPY result
-float verify_saxpy( const float tot, const size_t n, const float* const y )
-{
-  float err = 0;
-  for (size_t i = 0; i < n; i++) {
-    err += fabs( y[i] - tot );
-  }
-
-  return err;
-}
-
-
 int main( int argc, char** argv ) {
 
 Kokkos::initialize(argc, argv);
@@ -30,23 +18,25 @@ const float YVAL = rand() % 1000000;
 const float AVAL = rand() % 1000000;
 const float tot = AVAL * XVAL + YVAL;
 // Allocate arrays
-float* x = new float [ N ];
-float* y = new float [ N ];
+Kokkos::View<float*> x("X", N);
+Kokkos::View<float*> y("Y", N);
 // More definitions
 float clocktime, err;
 
 // Fill values
-for ( size_t i = 0; i < N; i++ ) {
-  x[i] = XVAL;
-  y[i] = YVAL;
-}
+Kokkos::parallel_for( "fill_values", N, 
+  KOKKOS_LAMBDA (const int64_t i) {
+  x(i) = XVAL;
+  y(i) = YVAL;
+});
 
 // Start timer
 Kokkos::Timer timer;
 
 // SAXPY
-Kokkos::parallel_for( "saxpy", N, KOKKOS_LAMBDA (const int64_t i) {
-  y[i] = AVAL * x[i] + y[i];
+Kokkos::parallel_for( "saxpy", N, 
+  KOKKOS_LAMBDA (const int64_t i) {
+    y(i) = AVAL * x(i) + y(i);
 });
 Kokkos::fence();
 
@@ -54,17 +44,18 @@ Kokkos::fence();
 clocktime = (float)timer.seconds();
 
 // SAXPY verification
-err = verify_saxpy( tot, N, y );
+err = 0.;
+Kokkos::parallel_reduce( "verify_saxpy", N, 
+  KOKKOS_LAMBDA (const int64_t i, float& tmperr) {
+    tmperr += fabs( y(i) - tot );
+}, 
+err);
 
 // Print stuff
 cout << "N: " << N << "; ";
 cout << "Err: " << err << "; ";
 cout << "Clock[ms]: " << clocktime*1000. << "; ";
 cout << endl;
-
-// Deallocate arrays
-delete [] y;
-delete [] x;
 
 }
 Kokkos::finalize();

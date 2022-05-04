@@ -3,5 +3,5 @@ out*
 a.out
 b.out
 *.x
-build/
+build*/
 More/

@@ -6,3 +6,6 @@ find_package(Kokkos REQUIRED)
 
 add_executable(saxpy_kokkos.x saxpy_kokkos.cpp)
 target_link_libraries(saxpy_kokkos.x Kokkos::kokkos)
+
+add_executable(saxpy_kokkos_lambda.x saxpy_kokkos_lambda.cpp)
+target_link_libraries(saxpy_kokkos_lambda.x Kokkos::kokkos)

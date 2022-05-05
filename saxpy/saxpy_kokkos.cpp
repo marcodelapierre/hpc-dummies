@@ -14,7 +14,7 @@ struct verify_saxpy {
     : tot(tot_), y(y_) {}
 
   KOKKOS_INLINE_FUNCTION
-  void operator()(const int64_t i, float& tmperr) const { 
+  void operator()( const int64_t i, float& tmperr ) const { 
     tmperr += fabs( y(i) - tot );
   }
 };
@@ -29,7 +29,7 @@ struct saxpy {
     : a(a_), x(x_), y(y_) {}
 
   KOKKOS_INLINE_FUNCTION
-  void operator()(const int64_t i) const { 
+  void operator()( const int64_t i ) const { 
     y(i) = a * x(i) + y(i); 
   }
 };
@@ -55,7 +55,7 @@ float clocktime, err;
 
 // Fill values
 Kokkos::parallel_for( "fill_values", N, 
-  KOKKOS_LAMBDA (const int64_t i) {
+  KOKKOS_LAMBDA ( const int64_t i ) {
   x(i) = XVAL;
   y(i) = YVAL;
 });

@@ -25,7 +25,7 @@ float clocktime, err;
 
 // Fill values
 Kokkos::parallel_for( "fill_values", N, 
-  KOKKOS_LAMBDA (const int64_t i) {
+  KOKKOS_LAMBDA ( const int64_t i ) {
   x(i) = XVAL;
   y(i) = YVAL;
 });
@@ -35,7 +35,7 @@ Kokkos::Timer timer;
 
 // SAXPY
 Kokkos::parallel_for( "saxpy", N, 
-  KOKKOS_LAMBDA (const int64_t i) {
+  KOKKOS_LAMBDA ( const int64_t i ) {
     y(i) = AVAL * x(i) + y(i);
 });
 Kokkos::fence();
@@ -46,7 +46,7 @@ clocktime = (float)timer.seconds();
 // SAXPY verification
 err = 0.;
 Kokkos::parallel_reduce( "verify_saxpy", N, 
-  KOKKOS_LAMBDA (const int64_t i, float& tmperr) {
+  KOKKOS_LAMBDA ( const int64_t i, float& tmperr ) {
     tmperr += fabs( y(i) - tot );
 }, 
 err);

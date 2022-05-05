@@ -28,7 +28,7 @@ cd build
 
 cmake .. \
   -DCMAKE_INSTALL_PREFIX=$(pwd)/../apps \
-  -DCMAKE_CXX_COMPILER=g++ \
+  -DCMAKE_CXX_COMPILER=$(pwd)/../bin/nvcc_wrapper \
   -DKokkos_ENABLE_OPENMP=On \
   -DKokkos_ENABLE_CUDA=On \
   -DKokkos_ARCH_SKX=On \

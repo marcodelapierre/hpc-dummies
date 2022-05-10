@@ -4,5 +4,7 @@ a.out
 b.out
 *.x
 build*/
+gmon.out
+results.csv
 More/
 mulan/

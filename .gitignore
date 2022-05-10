@@ -5,6 +5,6 @@ b.out
 *.x
 build*/
 gmon.out
-results.csv
+results.*
 More/
 mulan/

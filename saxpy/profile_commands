@@ -1,6 +1,6 @@
 # rocm
 # open trace on https://ui.perfetto.dev
-rocprof --stats --sys-trace ./ax.x
+rocprof --stats --sys-trace --hip-trace --hsa-trace ./rocm.x
 
 
 # cuda

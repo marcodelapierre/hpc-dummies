@@ -5,6 +5,7 @@ b.out
 *.x
 build*/
 gmon.out
+*.map
 *.qdrep
 *.sqlite
 results.*

@@ -5,6 +5,8 @@ b.out
 *.x
 build*/
 gmon.out
+*.qdrep
+*.sqlite
 results.*
 More/
 mulan/

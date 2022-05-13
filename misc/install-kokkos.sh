@@ -12,8 +12,8 @@
 download_kokkos="0"
 kokkos_version="3.5.00"
 
+module load cuda/11.4.2
 module load cmake/3.18.0
-module load cuda/11.1
 
 if [ "$download_kokkos" != "0" ] ; then
  rm -rf kokkos

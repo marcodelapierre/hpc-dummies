@@ -20,3 +20,33 @@ nsys stats rep_blas.qdrep &>rep_blas.txt
 nvprof --kernels saxpy -e all -m all ./ax.x &>out_nvprof_kernel
 
 ncu -k saxpy ./ax.x &>out_ncu_kernel  # from V100 onwards
+
+
+# Arm MAP
+map --profile ./ax.x
+
+
+# kokkos-tools 
+# see https://github.com/kokkos/kokkos-tutorials/blob/main/LectureSeries/KokkosTutorial_07_Tools.pdf
+tools_dir="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-tools"
+#
+# 1. kernel timer
+export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_kernel_timer.so"
+alias kp_reader="${tools_dir}/kp_reader"
+./ax.x
+kp_reader <datfile>.dat
+#
+# 2. space-time stack
+export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_space_time_stack.so"
+./ax.x
+# 3.
+export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_nvprof_connector.so"
+nsys profile -t cuda,nvtx,osrt -o rep_ax_kk ./ax.x
+
+
+# caliper
+# see https://software.llnl.gov/Caliper/CUDA.html
+CALI_CONFIG=runtime-report,profile.cuda ./ax.x &>out_ax_cuda_api
+CALI_CONFIG=cuda-activity-report ./ax.x &>out_ax_cuda_activity
+CALI_CONFIG=cuda-activity-report,cuda.memcpy ./ax.x &>out_ax_cuda_mem
+

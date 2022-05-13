@@ -4,6 +4,7 @@ a.out
 b.out
 *.x
 build*/
+core.*
 gmon.out
 *.map
 *.qdrep

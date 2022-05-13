@@ -7,12 +7,12 @@ rocprof --stats --sys-trace --hip-trace --hsa-trace ./rocm.x
 nvprof ./ax.x &>out_nvprof
 #nvprof --analysis-metrics -o metrics ./ax.x  # better to use nsys, with nsight gui
 
-nsys profile -t cuda,nvtx,osrt ./ax.x 
-mv report1.qdrep rep_ax.qdrep
+nsys profile -t cuda,nvtx,osrt -o rep_ax ./ax.x 
 nsys stats rep_ax.qdrep &>rep_ax.txt
+# one shot, however all output captured
+nsys profile -t cuda,nvtx,osrt -o rep_ax --stats=true ./ax.x &>rep_ax.txt
 
-nsys profile -t cuda,cublas,osrt ./blas.x 
-mv report1.qdrep rep_blas.qdrep
+nsys profile -t cuda,cublas,osrt -o rep_blas ./blas.x 
 nsys stats rep_blas.qdrep &>rep_blas.txt
 
 

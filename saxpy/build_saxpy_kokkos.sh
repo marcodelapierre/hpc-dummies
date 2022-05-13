@@ -1,12 +1,17 @@
 #!/bin/bash
 
-target="topaz-cpu"
+target="topaz-gpu"
+verbose_make="0"
+cmake_cxx_flags="-g"
+cmake_build_type="Release"
+#cmake_build_type="RelWithDebInfo"
+
 binary_name="saxpy_kokkos"
 
 if [ $target == "topaz-gpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos/apps"
   module load cmake/3.18.0
-  module load cuda/10.1
+  module load cuda/11.1
 elif [ $target == "topaz-cpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-cpu/apps"
   module load cmake/3.18.0
@@ -20,16 +25,23 @@ else
   exit 1
 fi
 
+if [ $verbose_make != "0" ] ; then
+  verbose_make_string="VERBOSE=1"
+else
+  verbose_make_string=""
+fi
+
 rm -f ${binary_name}*.x
 rm -rf build && mkdir build && cd build
 
 cmake .. \
 `#  -DCMAKE_CXX_COMPILER="g++"` \
-  -DCMAKE_BUILD_TYPE="Release" \
-  -DCMAKE_PREFIX_PATH="$Kokkos_ROOT" #\
+  -DCMAKE_CXX_FLAGS="${cmake_cxx_flags}" \
+  -DCMAKE_BUILD_TYPE="${cmake_build_type}" \
+  -DCMAKE_PREFIX_PATH="${Kokkos_ROOT}" #\
 #  -DKokkos_DIR="$Kokkos_ROOT/lib64/cmake/Kokkos"
 
-make
+make ${verbose_make_string}
 cp -p ${binary_name}*.x ..
 cd ..
 rm -rf build

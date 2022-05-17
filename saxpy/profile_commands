@@ -20,6 +20,8 @@ nsys stats rep_blas.qdrep &>rep_blas.txt
 nvprof --kernels saxpy -e all -m all ./ax.x &>out_nvprof_kernel
 
 ncu -k saxpy ./ax.x &>out_ncu_kernel  # from V100 onwards
+# the following produces output for Nsight Compute
+ncu -k saxpy -o rep_ncu_ax ./ax.x     # from V100 onwards
 
 
 # Arm MAP

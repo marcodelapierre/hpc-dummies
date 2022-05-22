@@ -5,6 +5,8 @@
 using namespace std;
 
 
+// Kokkos implementation using lambda functions
+
 int main( int argc, char** argv ) {
 
 Kokkos::initialize(argc, argv);

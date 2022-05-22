@@ -5,6 +5,8 @@
 using namespace std;
 
 
+// Kokkos implementation using functors
+
 // Verify SAXPY result
 struct verify_saxpy {
   const float tot;

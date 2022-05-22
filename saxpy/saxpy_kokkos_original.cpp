@@ -49,6 +49,8 @@
 #define FLOAT_TYPE float
 
 
+// Kokkos implementation using functors
+
 struct AXPBY {
   using view_t = Kokkos::View<FLOAT_TYPE *>;
   int N;

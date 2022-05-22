@@ -3,8 +3,10 @@
 Small codes for HPC testing:
 
 * `hello/`: hello worlds
-* `saxpy/`: SAXPY codes
 * `pidarts/`: MonteCarlo Pi codes
+* `saxpy/`: SAXPY codes
+* `saxpy2_profile/`: SAXPY codes for profiling tests (artifical loops)
+* `matmul/`: matrix multiply codes (*work in progress*)
 * `misc/`: utilities
   * `cpuid`: get CPU ID
   * `xthi`: get task and thread affinities

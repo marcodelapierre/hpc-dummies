@@ -11,8 +11,8 @@ endif ()
 add_executable(saxpy_kokkos.x saxpy_kokkos.cpp)
 target_link_libraries(saxpy_kokkos.x Kokkos::kokkos)
 
-add_executable(saxpy_kokkos_lambda.x saxpy_kokkos_lambda.cpp)
-target_link_libraries(saxpy_kokkos_lambda.x Kokkos::kokkos)
+add_executable(saxpy_kokkos_hostview.x saxpy_kokkos_hostview.cpp)
+target_link_libraries(saxpy_kokkos_hostview.x Kokkos::kokkos)
 
-add_executable(saxpy_kokkos_lambda_hostview.x saxpy_kokkos_lambda_hostview.cpp)
-target_link_libraries(saxpy_kokkos_lambda_hostview.x Kokkos::kokkos)
+add_executable(saxpy_kokkos_functor.x saxpy_kokkos_functor.cpp)
+target_link_libraries(saxpy_kokkos_functor.x Kokkos::kokkos)

@@ -5,7 +5,37 @@
 using namespace std;
 
 
-// Kokkos implementation using lambda functions
+// Kokkos implementation using functors
+
+// Verify SAXPY result
+struct verify_saxpy {
+  const float tot;
+  Kokkos::View<const float*> const y;
+
+  verify_saxpy( const float tot_, Kokkos::View<const float*> const y_ )
+    : tot(tot_), y(y_) {}
+
+  KOKKOS_INLINE_FUNCTION
+  void operator()( const int64_t i, float& tmperr ) const { 
+    tmperr += fabs( y(i) - tot );
+  }
+};
+
+// Perform SAXPY
+struct saxpy {
+  const float a;
+  Kokkos::View<const float*> const x;
+  Kokkos::View<float*> const y;
+
+  saxpy( const float a_, Kokkos::View<const float*> const x_, Kokkos::View<float*> const y_ )
+    : a(a_), x(x_), y(y_) {}
+
+  KOKKOS_INLINE_FUNCTION
+  void operator()( const int64_t i ) const { 
+    y(i) = a * x(i) + y(i); 
+  }
+};
+
 
 int main( int argc, char** argv ) {
 
@@ -36,10 +66,7 @@ Kokkos::parallel_for( "fill_values", N,
 Kokkos::Timer timer;
 
 // SAXPY
-Kokkos::parallel_for( "saxpy", N, 
-  KOKKOS_LAMBDA ( const int64_t i ) {
-    y(i) = AVAL * x(i) + y(i);
-});
+Kokkos::parallel_for( "saxpy", N, saxpy( AVAL, x, y ) );
 Kokkos::fence();
 
 // Stop timer
@@ -47,11 +74,7 @@ clocktime = (float)timer.seconds();
 
 // SAXPY verification
 err = 0.;
-Kokkos::parallel_reduce( "verify_saxpy", N, 
-  KOKKOS_LAMBDA ( const int64_t i, float& tmperr ) {
-    tmperr += fabs( y(i) - tot );
-}, 
-err);
+Kokkos::parallel_reduce( "verify_saxpy", N, verify_saxpy( tot, y ), err);
 
 // Print stuff
 cout << "N: " << N << "; ";

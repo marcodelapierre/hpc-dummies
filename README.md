@@ -10,4 +10,4 @@ Small codes for HPC testing:
   * `xthi`: get task and thread affinities
   * Kokkos installation scripts
   * Caliper installation script
-
+* `notes/`: text notes

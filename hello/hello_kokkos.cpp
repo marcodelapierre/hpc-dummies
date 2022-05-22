@@ -47,6 +47,8 @@
 #include <typeinfo>
 
 
+// Kokkos implementation using functors
+
 struct hello_world {
   KOKKOS_INLINE_FUNCTION
   void operator()(const int i) const {
@@ -62,7 +64,9 @@ int main(int argc, char* argv[]) {
   printf("Hello World on Kokkos execution space %s\n",
          typeid(Kokkos::DefaultExecutionSpace).name());
 
-  Kokkos::parallel_for("HelloWorld", 15, hello_world());
+  int n_repeats = 15;
+
+  Kokkos::parallel_for("HelloWorld", n_repeats, hello_world());
 
   Kokkos::finalize();
 }

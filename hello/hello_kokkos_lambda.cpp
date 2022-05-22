@@ -47,6 +47,8 @@
 #include <typeinfo>
 
 
+// Kokkos implementation using lambda functions
+
 int main(int argc, char* argv[]) {
 
   Kokkos::initialize(argc, argv);
@@ -54,9 +56,11 @@ int main(int argc, char* argv[]) {
   printf("Hello World on Kokkos execution space %s\n",
          typeid(Kokkos::DefaultExecutionSpace).name());
 
+  int n_repeats = 15;
+
 #if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
   Kokkos::parallel_for(
-      15, KOKKOS_LAMBDA(const int i) {
+      n_repeats, KOKKOS_LAMBDA(const int i) {
         // printf works in a CUDA parallel kernel; std::ostream does not.
         printf("Hello from i = %i\n", i);
       });

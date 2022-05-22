@@ -47,7 +47,15 @@
 #include <typeinfo>
 
 
-// Kokkos implementation using lambda functions
+// Kokkos implementation using functors
+
+struct hello_world {
+  KOKKOS_INLINE_FUNCTION
+  void operator()(const int i) const {
+    printf("Hello from i = %i\n", i);
+  }
+};
+
 
 int main(int argc, char* argv[]) {
 
@@ -58,13 +66,7 @@ int main(int argc, char* argv[]) {
 
   int n_repeats = 15;
 
-#if defined(KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA)
-  Kokkos::parallel_for(
-      n_repeats, KOKKOS_LAMBDA(const int i) {
-        // printf works in a CUDA parallel kernel; std::ostream does not.
-        printf("Hello from i = %i\n", i);
-      });
-#endif
+  Kokkos::parallel_for("HelloWorld", n_repeats, hello_world());
 
   Kokkos::finalize();
 }

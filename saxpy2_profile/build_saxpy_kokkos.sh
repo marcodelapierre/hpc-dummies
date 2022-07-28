@@ -6,7 +6,7 @@ cmake_cxx_flags="-g"
 cmake_build_type="Release"
 #cmake_build_type="RelWithDebInfo"
 
-binary_name="saxpy_kokkos"
+binary_name="saxpy2_kokkos"
 
 if [ $target == "topaz-gpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos/apps"

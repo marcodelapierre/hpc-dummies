@@ -12,7 +12,6 @@
 download_tools="0"
 tools_commit="c901382c4c76b108e4e6d190e9236848dc764526" # 5 April 2022
 
-# using Cray compiler
 module unload gcc/9.3.0
 module load craype-accel-amd-gfx908
 module load rocm/4.5.0

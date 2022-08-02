@@ -2,6 +2,7 @@
 
 target="topaz-gpu"
 verbose_make="0"
+cmake_cxx="g++"
 cmake_cxx_flags="-g"
 cmake_build_type="Release"
 #cmake_build_type="RelWithDebInfo"
@@ -20,6 +21,7 @@ elif [ $target == "topaz-cpu" ] ; then
 elif [ $target == "mulan-gpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-mulan/apps"
   Caliper_ROOT=""
+  cmake_cxx="hipcc"
   . /pawsey/mulan/bin/init-cmake-3.21.4.sh
   module unload gcc/9.3.0
   module load craype-accel-amd-gfx908
@@ -50,7 +52,7 @@ rm -f ${binary_name}*.x
 rm -rf build && mkdir build && cd build
 
 cmake .. \
-`#  -DCMAKE_CXX_COMPILER="g++"` \
+  -DCMAKE_CXX_COMPILER="${cmake_cxx}" \
   -DCMAKE_CXX_FLAGS="${cmake_cxx_flags}" \
   -DCMAKE_BUILD_TYPE="${cmake_build_type}" \
   -DCMAKE_PREFIX_PATH="${Kokkos_ROOT}" \

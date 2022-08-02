@@ -36,16 +36,18 @@ tools_dir="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-tools"
 # 1. kernel timer
 export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_kernel_timer.so"
 alias kp_reader="${tools_dir}/kp_reader"
-./ax.x
+./ax_kk.x
 kp_reader <datfile>.dat
 #
 # 2. space-time stack
 export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_space_time_stack.so"
-./ax.x
+./ax_kk.x
 # 3.
 export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_nvprof_connector.so"
 nsys profile -t cuda,nvtx,osrt -o rep_ax_kk ./ax.x
-
+# 4.
+export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_roctx_connector.so"
+rocprof --stats --sys-trace --roctx-trace -o rocprof_ax_kk.csv ./saxpy2_kokkos.x >log_ak_kk.txt
 
 # caliper
 # see https://software.llnl.gov/Caliper/CUDA.html

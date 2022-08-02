@@ -25,6 +25,7 @@ ncu -k saxpy -o rep_ncu_ax ./ax.x     # from V100 onwards
 
 
 # Arm MAP
+# Arm suggested compile flags (case by case): -O3 -g1 -fno-inline -fno-optimize-sibling-calls
 map --profile ./ax.x
 
 

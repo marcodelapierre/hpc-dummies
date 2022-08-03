@@ -44,10 +44,12 @@ export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_space_time_stack.so"
 ./ax_kk.x
 # 3.
 export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_nvprof_connector.so"
-nsys profile -t cuda,nvtx,osrt -o rep_ax_kk ./ax.x
+nsys profile -t cuda,nvtx,osrt -o rep_ax_kk ./ax_kk.x
+ncu --nvtx ./ax_kk.x >rep_ncu_ax_kk
+ncu --nvtx --print-summary per-nvtx ./ax_kk.x >summary_ncu_ax_kk
 # 4.
 export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_roctx_connector.so"
-rocprof --stats --sys-trace --roctx-trace -o rocprof_ax_kk.csv ./saxpy2_kokkos.x >log_ak_kk.txt
+rocprof --stats --sys-trace --roctx-trace -o rocprof_ax_kk.csv ./ax_kk.x >log_ak_kk.txt
 
 # caliper
 # see https://software.llnl.gov/Caliper/CUDA.html

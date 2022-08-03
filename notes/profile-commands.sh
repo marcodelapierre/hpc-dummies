@@ -46,6 +46,7 @@ export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_space_time_stack.so"
 export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_nvprof_connector.so"
 nsys profile -t cuda,nvtx,osrt -o rep_ax_kk ./ax_kk.x
 ncu --nvtx ./ax_kk.x >rep_ncu_ax_kk
+ncu --nvtx --nvtx-include "kernel/" ./ax_kk.x >rep_kernel_ncu_ax_kk
 ncu --nvtx --print-summary per-nvtx ./ax_kk.x >summary_ncu_ax_kk
 # 4.
 export KOKKOS_PROFILE_LIBRARY="${tools_dir}/kp_roctx_connector.so"

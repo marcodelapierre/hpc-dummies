@@ -16,6 +16,17 @@ if [ $target == "topaz-gpu" ] ; then
 elif [ $target == "topaz-cpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-cpu/apps"
   module load cmake/3.18.0
+elif [ $target == "mulan-gpu" ] ; then
+  Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-mulan/apps"
+  cmake_cxx="hipcc"
+  . /pawsey/mulan/bin/init-cmake-3.21.4.sh
+  module unload gcc/9.3.0
+  module load craype-accel-amd-gfx908
+  module load rocm/4.5.0
+elif [ $target == "mulan-cpu" ] ; then
+  Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-mulan-cpu/apps"
+  . /pawsey/mulan/bin/init-cmake-3.21.4.sh
+  module unload gcc/9.3.0
 elif [ $target == "zeus" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-zeus/apps"
   module load cmake/3.18.0

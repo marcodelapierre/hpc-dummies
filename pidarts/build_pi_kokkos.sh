@@ -1,6 +1,6 @@
 #!/bin/bash
 
-target="topaz-cpu-mac"
+target="topaz-cpu"
 binary_name="pi_kokkos"
 cmake_cxx="g++"
 

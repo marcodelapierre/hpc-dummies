@@ -8,7 +8,7 @@ binary_name="hello_kokkos"
 if [ $target == "topaz-gpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos/apps"
   module load cmake/3.18.0
-  module load cuda/10.1
+  module load cuda/11.4.2
 elif [ $target == "topaz-cpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-cpu/apps"
   module load cmake/3.18.0

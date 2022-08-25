@@ -11,8 +11,8 @@ struct shoot_darts {
   const double r2 = r*r;
 
   // Initialize all members
-//g  shoot_darts()
-//      : {}
+  shoot_darts(Kokkos::Random_XorShift64_Pool<> rand_pool_)
+      : rand_pool(rand_pool_) {}
 
   KOKKOS_INLINE_FUNCTION
   void operator()(long i, long& Ncirctmp) const {
@@ -31,10 +31,10 @@ struct shoot_darts {
  
 
 int main(int argc, char **argv) {
-
   Kokkos::initialize(argc, argv);
+
+  {
   Kokkos::Random_XorShift64_Pool<> rand_pool64(5374857);
-  Kokkos::Random_XorShift64_Pool<> rand_pool;
 
   const long num_trials = 1000000;
   long Ncirc = 0;
@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
   // Start timer
   Kokkos::Timer timer;
   // for loop with most of the compute
-  Kokkos::parallel_reduce( "shoot_darts", num_trials, shoot_darts(), Ncirc);
+  Kokkos::parallel_reduce("shoot_darts", num_trials, shoot_darts(rand_pool64), Ncirc);
   Kokkos::fence();
   // Get timer
   double clocktime = (double)timer.seconds();
@@ -53,9 +53,9 @@ int main(int argc, char **argv) {
   printf("\t For %ld trials, pi = %f\n", num_trials, pi);
   printf("\tTime required [ms] = %f\n", clocktime*1000.);
   printf("\n");
+  }
 
   Kokkos::finalize();
-
   return 0;
 }
 

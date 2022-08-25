@@ -15,7 +15,7 @@ module unload gcc/9.3.0
 . /pawsey/mulan/bin/init-cmake-3.21.4.sh
 
 if [ "$download_kokkos" != "0" ] ; then
- rm -rf kokkos
+ rm -rf kokkos-mulan-cpu
  git clone git:kokkos/kokkos kokkos-mulan-cpu
 fi
 

@@ -18,7 +18,7 @@ module load rocm/4.5.0
 . /pawsey/mulan/bin/init-cmake-3.21.4.sh
 
 if [ "$download_kokkos" != "0" ] ; then
- rm -rf kokkos
+ rm -rf kokkos-mulan
  git clone git:kokkos/kokkos kokkos-mulan
 fi
 

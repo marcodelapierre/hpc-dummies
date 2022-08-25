@@ -14,7 +14,7 @@ kokkos_version="3.5.00"
 module load cmake/3.18.0
 
 if [ "$download_kokkos" != "0" ] ; then
- rm -rf kokkos
+ rm -rf kokkos-cpu
  git clone git:kokkos/kokkos kokkos-cpu
 fi
 

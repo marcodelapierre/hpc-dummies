@@ -19,8 +19,8 @@ struct shoot_darts {
     // Get a random number state from the pool for the active thread
     typename Kokkos::Random_XorShift64_Pool<>::generator_type rand_gen = rand_pool.get_state();
 
-    double x = rand_gen.urand64(1);
-    double y = rand_gen.urand64(1);
+    double x = rand_gen.drand(1.0);
+    double y = rand_gen.drand(1.0);
     if ((x*x + y*y) <= r2)
       Ncirctmp++;
 

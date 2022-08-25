@@ -3,6 +3,8 @@
 #include <Kokkos_Random.hpp>
 #include <cstdio>
 
+// Kokkos implementation using functors
+
 struct shoot_darts {
   // The GeneratorPool
   Kokkos::Random_XorShift64_Pool<> rand_pool;

@@ -1,4 +1,4 @@
-/* Compute pi in serial */
+/* Compute pi using HIP */
 #include <stdio.h>
 #include <hip/hip_runtime.h>
 #include <hiprand.h>

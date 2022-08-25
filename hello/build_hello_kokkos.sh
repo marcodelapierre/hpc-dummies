@@ -2,6 +2,7 @@
 
 target="topaz-cpu"
 binary_name="hello_kokkos"
+cmake_cxx="g++"
 
 if [ $target == "topaz-gpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos/apps"
@@ -15,6 +16,9 @@ elif [ $target == "zeus" ] ; then
   module load cmake/3.18.0
   module swap sandybridge broadwell
   module swap gcc gcc/8.3.0
+elif [ $target == "topaz-cpu-mac" ] ; then
+  Kokkos_ROOT="$HOME/software/kokkos/apps"
+  cmake_cxx="g++-12"
 else
   echo "Wrong target, exiting."
   exit 1
@@ -24,7 +28,7 @@ rm -f ${binary_name}*.x
 rm -rf build && mkdir build && cd build
 
 cmake .. \
-`#  -DCMAKE_CXX_COMPILER="g++"` \
+  -DCMAKE_CXX_COMPILER="$cmake_cxx" \
   -DCMAKE_PREFIX_PATH="$Kokkos_ROOT" #\
 #  -DKokkos_ROOT="$kokkos_dir/lib64/cmake/Kokkos"
 

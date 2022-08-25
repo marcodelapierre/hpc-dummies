@@ -1,6 +1,6 @@
 #!/bin/bash
 
-target="topaz-gpu"
+target="topaz-cpu-mac"
 verbose_make="0"
 cmake_cxx="g++"
 cmake_cxx_flags="-g"
@@ -37,6 +37,9 @@ elif [ $target == "zeus" ] ; then
   module load cmake/3.18.0
   module swap sandybridge broadwell
   module swap gcc gcc/8.3.0
+elif [ $target == "topaz-cpu-mac" ] ; then
+  Kokkos_ROOT="$HOME/software/kokkos/apps"
+  cmake_cxx="g++-12"
 else
   echo "Wrong target, exiting."
   exit 1

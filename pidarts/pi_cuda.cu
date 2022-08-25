@@ -1,4 +1,4 @@
-/* Compute pi using Cuda */
+/* Compute pi using CUDA */
 #include <stdio.h>
 #include <cuda.h>
 #include <curand.h>

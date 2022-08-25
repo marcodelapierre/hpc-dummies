@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
  
   pi = 4.0 * ((double)Ncirc)/((double)num_trials);
    
-  printf("\n \t Computing pi using CUDA: \n");
+  printf("\n \t Computing pi using HIP: \n");
   printf("\t For %ld trials, pi = %f\n", num_trials, pi);
   printf("\n");
  

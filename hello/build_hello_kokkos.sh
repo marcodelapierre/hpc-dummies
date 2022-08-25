@@ -17,7 +17,7 @@ elif [ $target == "zeus" ] ; then
   module load cmake/3.18.0
   module swap sandybridge broadwell
   module swap gcc gcc/8.3.0
-elif [ $target == "topaz-cpu-mac" ] ; then
+elif [ $target == "mac-cpu" ] ; then
   Kokkos_ROOT="$HOME/software/kokkos/apps"
   cmake_cxx="g++-12"
 else

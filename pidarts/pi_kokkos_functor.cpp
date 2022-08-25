@@ -6,11 +6,12 @@
 struct shoot_darts {
   // The GeneratorPool
   Kokkos::Random_XorShift64_Pool<> rand_pool;
+
   const double r = 1.0; // radius of circle
   const double r2 = r*r;
 
   // Initialize all members
-//  shoot_darts()
+//g  shoot_darts()
 //      : {}
 
   KOKKOS_INLINE_FUNCTION

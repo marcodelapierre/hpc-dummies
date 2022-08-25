@@ -1,9 +1,9 @@
 #!/bin/bash
 
-target="topaz-gpu"
+target="topaz-cpu"
 verbose_make="0"
 cmake_cxx="g++"
-cmake_cxx_flags="-g -O3"
+cmake_cxx_flags="-g"
 cmake_build_type="Release"
 #cmake_build_type="RelWithDebInfo"
 

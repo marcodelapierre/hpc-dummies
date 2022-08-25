@@ -1,8 +1,9 @@
 #!/bin/bash
 
 target="topaz-cpu"
-binary_name="hello_kokkos"
 cmake_cxx="g++"
+
+binary_name="hello_kokkos"
 
 if [ $target == "topaz-gpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos/apps"

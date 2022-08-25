@@ -9,6 +9,7 @@ gmon.out
 *.map
 *.qdrep
 *.sqlite
+*.dSYM
 results.*
 More/
 mulan/

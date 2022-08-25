@@ -11,5 +11,5 @@ endif ()
 add_executable(pi_kokkos.x pi_kokkos.cpp)
 target_link_libraries(pi_kokkos.x Kokkos::kokkos)
 
-#add_executable(pi_kokkos_functor.x pi_kokkos_functor.cpp)
-#target_link_libraries(pi_kokkos_functor.x Kokkos::kokkos)
+add_executable(pi_kokkos_functor.x pi_kokkos_functor.cpp)
+target_link_libraries(pi_kokkos_functor.x Kokkos::kokkos)

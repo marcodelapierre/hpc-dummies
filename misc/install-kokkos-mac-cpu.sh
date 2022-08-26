@@ -18,6 +18,7 @@ cmake .. \
   -DCMAKE_INSTALL_PREFIX=$(pwd)/../apps \
   -DCMAKE_CXX_COMPILER=g++-12 \
   -DKokkos_ENABLE_OPENMP=On \
+  -DKokkos_ARCH_ARMV81=On \
   -DKokkos_ENABLE_EXAMPLES=On
 
 make

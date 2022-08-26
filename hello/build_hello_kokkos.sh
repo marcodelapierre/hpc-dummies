@@ -1,6 +1,6 @@
 #!/bin/bash
 
-target="topaz-cpu"
+target="${target:-topaz-gpu}"
 cmake_cxx="g++"
 
 binary_name="hello_kokkos"

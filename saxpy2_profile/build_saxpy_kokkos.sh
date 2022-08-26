@@ -1,6 +1,6 @@
 #!/bin/bash
 
-target="topaz-cpu"
+target="${target:-topaz-gpu}"
 verbose_make="0"
 cmake_cxx="g++"
 cmake_cxx_flags="-g"

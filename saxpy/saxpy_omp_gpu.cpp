@@ -11,7 +11,7 @@ using namespace std;
 float verify_saxpy( const float tot, const size_t n, const float* const y )
 {
   float err = 0.;
-  # pragma omp target data map(err)
+  #pragma omp target data map(err)
   {
   #pragma omp target teams distribute parallel for
   for (size_t i = 0; i < n; i++) {

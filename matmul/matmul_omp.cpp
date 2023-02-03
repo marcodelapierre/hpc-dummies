@@ -2,6 +2,7 @@
 #include <cmath>
 #include <ctime>
 #include "my_timer.h"
+#include <omp.h>
 
 using namespace std;
 

@@ -1,12 +1,13 @@
-#include <cuda_runtime.h>
+#include "hip/hip_runtime.h"
+#include <hip/hip_runtime.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
 
 #define CUDA_ERROR_CHECK(X)({\
-    if((X) != cudaSuccess){\
-      printf("CUDA ERROR %s: %s\n", (X), cudaGetErrorString((X)));\
+    if((X) != hipSuccess){\
+      printf("CUDA ERROR %s: %s\n", (X), hipGetErrorString((X)));\
       exit(1);\
     }\
 })
@@ -61,9 +62,9 @@ __global__ void matmul( const size_t n, const float* const A,
 int main( int argc, char** argv ) {
 
 int device;
-struct cudaDeviceProp devprop;
-CUDA_ERROR_CHECK(cudaGetDevice( &device ));
-CUDA_ERROR_CHECK(cudaGetDeviceProperties( &devprop, device ));
+struct hipDeviceProp_t devprop;
+CUDA_ERROR_CHECK(hipGetDevice( &device ));
+CUDA_ERROR_CHECK(hipGetDeviceProperties( &devprop, device ));
 printf("Device name: %s\n",devprop.name);
 
 // Size of problem
@@ -77,10 +78,10 @@ const float tot = AVAL * BVAL * N;
 const size_t Nsize = N * sizeof(float);
 const size_t Nsize2 = Nsize * Nsize;
 float *A, *B, *C, *C_host;
-CUDA_ERROR_CHECK(cudaMalloc( (void**)&A, Nsize2 ));
-CUDA_ERROR_CHECK(cudaMalloc( (void**)&B, Nsize2 ));
-CUDA_ERROR_CHECK(cudaMalloc( (void**)&C, Nsize2 ));
-CUDA_ERROR_CHECK(cudaMallocHost( (void**)&C_host, Nsize2 ));
+CUDA_ERROR_CHECK(hipMalloc( (void**)&A, Nsize2 ));
+CUDA_ERROR_CHECK(hipMalloc( (void**)&B, Nsize2 ));
+CUDA_ERROR_CHECK(hipMalloc( (void**)&C, Nsize2 ));
+CUDA_ERROR_CHECK(hipHostMalloc( (void**)&C_host, Nsize2 ));
 // More definitions
 float clocktime, err;
 clock_t start, watch;
@@ -88,13 +89,13 @@ clock_t start, watch;
 const int gridDim = 4 * devprop.multiProcessorCount;
 const int blockDim = 8 * devprop.warpSize;
 // Fill values
-init_array<<< gridDim, blockDim >>>(N2, AVAL, A);
-CUDA_ERROR_CHECK(cudaGetLastError());
-init_array<<< gridDim, blockDim >>>(N2, BVAL, B);
-CUDA_ERROR_CHECK(cudaGetLastError());
-init_array<<< gridDim, blockDim >>>(N2, 0., C);
-CUDA_ERROR_CHECK(cudaGetLastError());
-CUDA_ERROR_CHECK(cudaDeviceSynchronize());
+hipLaunchKernelGGL(init_array, dim3(gridDim), dim3(blockDim ), 0, 0, N2, AVAL, A);
+CUDA_ERROR_CHECK(hipGetLastError());
+hipLaunchKernelGGL(init_array, dim3(gridDim), dim3(blockDim ), 0, 0, N2, BVAL, B);
+CUDA_ERROR_CHECK(hipGetLastError());
+hipLaunchKernelGGL(init_array, dim3(gridDim), dim3(blockDim ), 0, 0, N2, 0., C);
+CUDA_ERROR_CHECK(hipGetLastError());
+CUDA_ERROR_CHECK(hipDeviceSynchronize());
 
 // Start timer
 start = clock();
@@ -102,26 +103,26 @@ start = clock();
 // MATMUL
 const dim3 gridDim2D(32, 32); // just putting a value
 const dim3 blockDim2D(16, 16);
-matmul<<< gridDim2D, blockDim2D >>>(N, A, B, C);
-CUDA_ERROR_CHECK(cudaGetLastError());
-CUDA_ERROR_CHECK(cudaDeviceSynchronize());
+hipLaunchKernelGGL(matmul, dim3(gridDim2D), dim3(blockDim2D ), 0, 0, N, A, B, C);
+CUDA_ERROR_CHECK(hipGetLastError());
+CUDA_ERROR_CHECK(hipDeviceSynchronize());
 
 // Stop timer
 watch = clock() - start;
 clocktime = ((float)watch)/CLOCKS_PER_SEC;
 
 // MATMUL verification
-CUDA_ERROR_CHECK(cudaMemcpy(C_host, C, Nsize2, cudaMemcpyDeviceToHost));
+CUDA_ERROR_CHECK(hipMemcpy(C_host, C, Nsize2, hipMemcpyDeviceToHost));
 err = verify_matmul( tot, N2, C_host );
 
 // Print stuff
 printf("N: %i; Err: %f; Clock[ms]: %f;\n", N, err, clocktime*1000.);
 
 // Deallocate arrays
-CUDA_ERROR_CHECK(cudaFreeHost( C_host ));
-CUDA_ERROR_CHECK(cudaFree( C ));
-CUDA_ERROR_CHECK(cudaFree( B ));
-CUDA_ERROR_CHECK(cudaFree( A ));
+CUDA_ERROR_CHECK(hipHostFree( C_host ));
+CUDA_ERROR_CHECK(hipFree( C ));
+CUDA_ERROR_CHECK(hipFree( B ));
+CUDA_ERROR_CHECK(hipFree( A ));
 
 return 0;
 }

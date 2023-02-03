@@ -25,7 +25,7 @@ void matmul( const size_t n, const float* const A,
   #pragma omp target teams distribute parallel for collapse(2) map(A[0:n*n]) map(B[0:n*n]) map(C[0:n*n])
   for ( size_t i = 0; i < n; i++ )
     for ( size_t j = 0; j < n; j++ ) {
-      double sum = 0;
+      double sum = 0.;
 
       for ( size_t k = 0; k < n; k++ ) {
         double a = A[i * n + k];

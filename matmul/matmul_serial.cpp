@@ -23,7 +23,7 @@ void matmul( const size_t n, const float* const A,
 {
   for ( size_t i = 0; i < n; i++ )
     for ( size_t j = 0; j < n; j++ ) {
-      double sum = 0;
+      double sum = 0.;
 
       for ( size_t k = 0; k < n; k++ ) {
         double a = A[i * n + k];

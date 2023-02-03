@@ -16,3 +16,10 @@ target_link_libraries(saxpy_kokkos_hostview.x Kokkos::kokkos)
 
 add_executable(saxpy_kokkos_functor.x saxpy_kokkos_functor.cpp)
 target_link_libraries(saxpy_kokkos_functor.x Kokkos::kokkos)
+
+if( NOT ${KokkosKernels_ROOT} STREQUAL "" )
+add_executable(saxpy_kokkos_kkblas.x saxpy_kokkos_kkblas.cpp)
+target_link_directories(saxpy_kokkos_kkblas.x PUBLIC ${KokkosKernels_ROOT}/lib64)
+target_include_directories(saxpy_kokkos_kkblas.x PRIVATE ${KokkosKernels_ROOT}/include)
+target_link_libraries(saxpy_kokkos_kkblas.x Kokkos::kokkos kokkoskernels)
+endif()

@@ -13,3 +13,13 @@ Small codes for HPC testing:
   * Kokkos installation scripts
   * Caliper installation script
 * `notes/`: text notes
+
+Paradigms adopted include:
+* Serial
+* Serial with AVX2
+* OpenMP
+* OpenMP with target offloading
+* CUDA
+* HIP
+* Kokkos (including Kernels and RNG)
+

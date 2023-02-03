@@ -6,6 +6,8 @@ cmake_cxx="g++"
 cmake_cxx_flags="-g"
 cmake_build_type="Release"
 #cmake_build_type="RelWithDebInfo"
+#Caliper_ROOT=""
+Kernels_ROOT=""
 
 binary_name="saxpy_kokkos"
 
@@ -18,13 +20,10 @@ if [ $target == "topaz-gpu" ] ; then
   module load cuda/11.4.2
 elif [ $target == "topaz-cpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-cpu/apps"
-  #Caliper_ROOT=""
   Kernels_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-kernels-cpu/apps"
   module load cmake/3.18.0
 elif [ $target == "mulan-gpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-mulan/apps"
-  #Caliper_ROOT=""
-  Kernels_ROOT=""
   cmake_cxx="hipcc"
   . /pawsey/mulan/bin/init-cmake-3.21.4.sh
   module unload gcc/9.3.0
@@ -32,14 +31,10 @@ elif [ $target == "mulan-gpu" ] ; then
   module load rocm/4.5.0
 elif [ $target == "mulan-cpu" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-mulan-cpu/apps"
-  #Caliper_ROOT=""
-  Kernels_ROOT=""
   . /pawsey/mulan/bin/init-cmake-3.21.4.sh
   module unload gcc/9.3.0
 elif [ $target == "zeus" ] ; then
   Kokkos_ROOT="/group/pawsey0001/mdelapierre/VISCOUS/kokkos-setup/kokkos-zeus/apps"
-  #Caliper_ROOT=""
-  Kernels_ROOT=""
   module load cmake/3.18.0
   module swap sandybridge broadwell
   module swap gcc gcc/8.3.0

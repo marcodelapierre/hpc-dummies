@@ -10,3 +10,10 @@ endif ()
 
 add_executable(matmul_kokkos.x matmul_kokkos.cpp)
 target_link_libraries(matmul_kokkos.x Kokkos::kokkos)
+
+if( NOT ${KokkosKernels_ROOT} STREQUAL "" )
+add_executable(matmul_kokkos_kkblas.x matmul_kokkos_kkblas.cpp)
+target_link_directories(matmul_kokkos_kkblas.x PUBLIC ${KokkosKernels_ROOT}/lib64)
+target_include_directories(matmul_kokkos_kkblas.x PRIVATE ${KokkosKernels_ROOT}/include)
+target_link_libraries(matmul_kokkos_kkblas.x Kokkos::kokkos kokkoskernels)
+endif()

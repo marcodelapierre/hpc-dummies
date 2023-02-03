@@ -16,7 +16,7 @@ module load cuda/11.4.2
 module load openmpi-ucx-gpu/4.0.2
 
 if [ "$download_tools" != "0" ] ; then
- git clone git:kokkos/kokkos-tools
+ git clone git@github.com:kokkos/kokkos-tools
 fi
 
 cd kokkos-tools

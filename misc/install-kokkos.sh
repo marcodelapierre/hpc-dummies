@@ -17,7 +17,7 @@ module load cmake/3.18.0
 
 if [ "$download_kokkos" != "0" ] ; then
  rm -rf kokkos
- git clone git:kokkos/kokkos
+ git clone git@github.com:kokkos/kokkos
 fi
 
 cd kokkos

@@ -17,7 +17,7 @@ module load craype-accel-amd-gfx908
 module load rocm/4.5.0
 
 if [ "$download_tools" != "0" ] ; then
- git clone git:kokkos/kokkos-tools kokkos-tools-mulan
+ git clone git@github.com:kokkos/kokkos-tools kokkos-tools-mulan
 fi
 
 cd kokkos-tools-mulan

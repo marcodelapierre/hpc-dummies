@@ -16,7 +16,7 @@ module unload gcc/9.3.0
 
 if [ "$download_kokkos" != "0" ] ; then
  rm -rf kokkos-mulan-cpu
- git clone git:kokkos/kokkos kokkos-mulan-cpu
+ git clone git@github.com:kokkos/kokkos kokkos-mulan-cpu
 fi
 
 cd kokkos-mulan-cpu

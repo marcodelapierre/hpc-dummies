@@ -19,7 +19,7 @@ module load rocm/4.5.0
 
 if [ "$download_kokkos" != "0" ] ; then
  rm -rf kokkos-mulan
- git clone git:kokkos/kokkos kokkos-mulan
+ git clone git@github.com:kokkos/kokkos kokkos-mulan
 fi
 
 cd kokkos-mulan

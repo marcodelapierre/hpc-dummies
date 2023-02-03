@@ -17,7 +17,7 @@ module load openmpi-ucx-gpu/4.0.2
 module load cmake/3.18.0
 
 if [ "$download_caliper" != "0" ] ; then
- git clone git:llnl/caliper
+ git clone git@github.com:llnl/caliper
 fi
 
 cd caliper

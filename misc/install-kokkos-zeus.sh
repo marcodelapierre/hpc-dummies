@@ -16,7 +16,7 @@ module swap gcc gcc/8.3.0
 
 if [ "$download_kokkos" != "0" ] ; then
  rm -rf kokkos-zeus
- git clone git:kokkos/kokkos kokkos-zeus
+ git clone git@github.com:kokkos/kokkos kokkos-zeus
 fi
 
 cd kokkos-zeus

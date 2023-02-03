@@ -37,7 +37,7 @@ Kokkos::parallel_for( "fill_values", N,
 Kokkos::Timer timer;
 
 // SAXPY
-KokkosBlas::axpy(AVAL,x,y);
+KokkosBlas::axpy( AVAL, x, y );
 Kokkos::fence();
 
 // Stop timer

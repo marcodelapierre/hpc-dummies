@@ -49,7 +49,7 @@ Kokkos::parallel_for( "initC", mdrange_policy({0,0}, {N,N}), KOKKOS_LAMBDA ( con
 Kokkos::Timer timer;
 
 // MATMUL
-KokkosBlas::gemm("N","N",1.,A,B,1.,C);
+KokkosBlas::gemm( "N", "N", 1., A, B, 1., C );
 Kokkos::fence();
 
 // Stop timer

@@ -54,7 +54,7 @@ if ( rank == manager ) {
   vals[3]  = vals[0] * vals[1] + vals[2];
 }
 // Send parameters from manager rank to all others
-MPI_Bcast( vals, 4, MPI_FLOAT, manager, MPI_COMM_WORLD ); 
+MPI_Bcast( vals, 4, MPI_FLOAT, manager, MPI_COMM_WORLD );
 
 // Allocate arrays
 float* x = new float [ n_per_rank ];
@@ -74,16 +74,18 @@ for ( size_t i = rank; i < n_per_rank; i++ ) {
 
 // Start timer
 //clock_t start = clock();
+MPI_Barrier(MPI_COMM_WORLD);
 my_timer timer;
 // SAXPY
 saxpy_mpi( rank, n_per_rank, N, vals[0], x, y );
 // Stop timer
 //clock_t watch = clock() - start;
 //const float clocktime = ((float)watch)/CLOCKS_PER_SEC;
+MPI_Barrier(MPI_COMM_WORLD);
 clocktime = (float)timer.elapsed();
 
 // Get all elements back to manager rank
-MPI_Gather( y, n_per_rank, MPI_FLOAT, ytot, n_per_rank, MPI_FLOAT, manager, MPI_COMM_WORLD ); 
+MPI_Gather( y, n_per_rank, MPI_FLOAT, ytot, n_per_rank, MPI_FLOAT, manager, MPI_COMM_WORLD );
 
 if ( rank == manager ) {
 // SAXPY verification
@@ -97,6 +99,7 @@ if ( rank == manager ) {
 }
 
 // Deallocate arrays
+delete [] ytot;
 delete [] y;
 delete [] x;
 

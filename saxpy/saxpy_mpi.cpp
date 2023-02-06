@@ -19,13 +19,13 @@ float verify_saxpy( const float tot, const size_t n, const float* const y )
 }
 
 // Perform SAXPY
-void saxpy_mpi( const size_t n0, const size_t n_per_rank, 
+void saxpy_mpi( const size_t n0, const size_t n_per_call, 
             const size_t ntot, const float a, 
             const float* const x, float* const y )
 {
-  for ( size_t i = n0; i < n0 + n_per_rank; i++ ) {
+  for ( size_t i = n0 * n_per_call; i < n0 * n_per_call + n_per_call; i++ ) {
     if ( i >= ntot ) break;
-    unsigned i_rank = i % n_per_rank;
+    const unsigned i_rank = i % n_per_call;
     y[i_rank] = a * x[i_rank] + y[i_rank];
   }
 }
@@ -38,7 +38,6 @@ MPI_Init( &argc, &argv );
 int rank, size, manager = 0;
 MPI_Comm_size( MPI_COMM_WORLD, &size );
 MPI_Comm_rank( MPI_COMM_WORLD, &rank );
-MPI_Status status;
 
 // More definitions
 float clocktime, err;
@@ -65,9 +64,9 @@ if ( rank == manager ) {
 }
 
 // Fill values
-for ( size_t i = rank; i < n_per_rank; i++ ) {
+for ( size_t i = rank * n_per_rank; i < rank * n_per_rank + n_per_rank; i++ ) {
   if ( i >= N ) break;
-  unsigned i_rank = i % n_per_rank;
+  const unsigned i_rank = i % n_per_rank;
   x[i_rank] = vals[1];
   y[i_rank] = vals[2];
 }
@@ -99,7 +98,9 @@ if ( rank == manager ) {
 }
 
 // Deallocate arrays
-delete [] ytot;
+if ( rank == manager ) {
+  delete [] ytot;
+}
 delete [] y;
 delete [] x;
 

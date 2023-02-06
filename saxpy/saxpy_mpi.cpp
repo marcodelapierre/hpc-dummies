@@ -60,6 +60,9 @@ MPI_Bcast( vals, 4, MPI_FLOAT, manager, MPI_COMM_WORLD);
 // Allocate arrays
 float* x = new float [ n_per_rank ];
 float* y = new float [ n_per_rank ];
+if ( rank == manager ) {
+  float* ytot = new float [ N ];
+}
 
 // Fill values
 for ( size_t i = rank; i < n_per_rank; i++ ) {
@@ -80,7 +83,7 @@ saxpy_mpi( rank, n_per_rank, N, vals[0], x, y );
 clocktime = (float)timer.elapsed();
 
 // Get all elements back to manager rank
-MPI_Gather( y, n_per_rank, MPI_FLOAT, 0, n_per_rank, MPI_FLOAT, manager, MPI_COMM_WORLD); 
+MPI_Gather( y, n_per_rank, MPI_FLOAT, ytot, n_per_rank, MPI_FLOAT, manager, MPI_COMM_WORLD); 
 
 // SAXPY verification
 err = verify_saxpy( vals[3], N, y );

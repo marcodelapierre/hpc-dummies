@@ -24,7 +24,7 @@ void saxpy_mpi( const size_t n0, const size_t n_per_rank,
             const float* const x, float* const y )
 {
   for ( size_t i = n0; i < n0 + n_per_rank; i++ ) {
-    if ( i >= ntot) break;
+    if ( i >= ntot ) break;
     unsigned i_rank = i % n_per_rank;
     y[i_rank] = a * x[i_rank] + y[i_rank];
   }
@@ -34,10 +34,10 @@ void saxpy_mpi( const size_t n0, const size_t n_per_rank,
 int main( int argc, char** argv ) {
 
 // MPI initialisation
-MPI_Init(&argc, &argv);
+MPI_Init( &argc, &argv );
 int rank, size, manager = 0;
-MPI_Comm_size(MPI_COMM_WORLD, &size);
-MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+MPI_Comm_size( MPI_COMM_WORLD, &size );
+MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 MPI_Status status;
 
 // More definitions
@@ -45,7 +45,6 @@ float clocktime, err;
 // Size of problem
 const unsigned N = (1 << 26);
 const unsigned n_per_rank = (N - 1)/size + 1;
-const unsigned rank_top = rank + n_per_rank;
 // Parameters
 float vals[4];
 if ( rank == manager ) {
@@ -55,7 +54,7 @@ if ( rank == manager ) {
   vals[3]  = vals[0] * vals[1] + vals[2];
 }
 // Send parameters from manager rank to all others
-MPI_Bcast( vals, 4, MPI_FLOAT, manager, MPI_COMM_WORLD); 
+MPI_Bcast( vals, 4, MPI_FLOAT, manager, MPI_COMM_WORLD ); 
 
 // Allocate arrays
 float* x = new float [ n_per_rank ];
@@ -84,16 +83,18 @@ saxpy_mpi( rank, n_per_rank, N, vals[0], x, y );
 clocktime = (float)timer.elapsed();
 
 // Get all elements back to manager rank
-MPI_Gather( y, n_per_rank, MPI_FLOAT, ytot, n_per_rank, MPI_FLOAT, manager, MPI_COMM_WORLD); 
+MPI_Gather( y, n_per_rank, MPI_FLOAT, ytot, n_per_rank, MPI_FLOAT, manager, MPI_COMM_WORLD ); 
 
+if ( rank == manager ) {
 // SAXPY verification
-err = verify_saxpy( vals[3], N, y );
+  err = verify_saxpy( vals[3], N, ytot );
 
 // Print stuff
-cout << "N: " << N << "; ";
-cout << "Err: " << err << "; ";
-cout << "Clock[ms]: " << clocktime*1000. << "; ";
-cout << endl;
+  cout << "N: " << N << "; ";
+  cout << "Err: " << err << "; ";
+  cout << "Clock[ms]: " << clocktime*1000. << "; ";
+  cout << endl;
+}
 
 // Deallocate arrays
 delete [] y;

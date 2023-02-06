@@ -60,8 +60,9 @@ MPI_Bcast( vals, 4, MPI_FLOAT, manager, MPI_COMM_WORLD);
 // Allocate arrays
 float* x = new float [ n_per_rank ];
 float* y = new float [ n_per_rank ];
+float* ytot;
 if ( rank == manager ) {
-  float* ytot = new float [ N ];
+  ytot = new float [ N ];
 }
 
 // Fill values

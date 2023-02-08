@@ -14,7 +14,7 @@ Small codes for HPC testing:
   * Caliper installation script
 * `notes/`: text notes
 
-Paradigms adopted include:
+Adopted paradigms include:
 * Serial
 * Serial with AVX2
 * OpenMP

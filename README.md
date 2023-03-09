@@ -10,6 +10,7 @@ Small codes for HPC testing:
 * `misc/`: utilities
   * `cpuid`: get CPU ID
   * `xthi`: get task and thread affinities
+  * `hello_jobstep_hip`: HIP enabled affinities
   * Kokkos installation scripts
   * Caliper installation script
 * `notes/`: text notes

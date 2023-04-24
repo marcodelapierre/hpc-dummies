@@ -13,7 +13,7 @@ int main()
   #pragma omp parallel
   {
       if ( omp_is_initial_device() ) {
-        printf("Running on host\n");    
+        printf("Running on host\n");
       } else {
         int thid = omp_get_thread_num();
         int nthreads= omp_get_num_threads();

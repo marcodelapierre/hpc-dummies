@@ -18,13 +18,13 @@ CXXFLAGSADD = -D__HIP_ARCH_GFX90A__=1 --offload-arch=gfx90a
 #CXXFLAGSADD = -D__HIP_ARCH_GFX90A__=1 --offload-arch=gfx90a
 
 CXXFLAGS = -std=c++11 -fopenmp --rocm-path=${ROCM_PATH} -x hip $(CXXFLAGSADD)
-LDFLAGS = -fopenmp --rocm-path=${ROCM_PATH}
+LFLAGS = -fopenmp --rocm-path=${ROCM_PATH}
 
 INCLUDES  = -I${ROCM_PATH}/include
 LIBRARIES = -L${ROCM_PATH}/lib -lamdhip64
 
 hello_jobstep_hip.x: hello_jobstep_hip.o
-	${COMP} ${LDFLAGS} ${LIBRARIES} hello_jobstep_hip.o -o hello_jobstep_hip.x
+	${COMP} ${LFLAGS} ${LIBRARIES} hello_jobstep_hip.o -o hello_jobstep_hip.x
 
 hello_jobstep_hip.o: hello_jobstep_hip.cpp
 	${COMP} ${CXXFLAGS} ${INCLUDES} -c hello_jobstep_hip.cpp

@@ -1,31 +1,15 @@
-COMP   = CC
+COMP = hipcc
 
-#------
-#=== Additiona flags for compililation at specific systems in ORNL
-#-- For spock, bones. Use:
-#CXXFLAGSADD = -D__HIP_ARCH_GFX908__=1 --offload-arch=gfx908
-#-- For borg,crusher,frontier. Use:
-#CXXFLAGSADD = -D__HIP_ARCH_GFX90A__=1 --offload-arch=gfx90a
+CXXFLAGS = -O3 -fopenmp
 
-#=== Additional flags for compilation at specific systems in Pawsey
-#-- For mulan. Use:
-#CXXFLAGSADD = -D__HIP_ARCH_GFX908__=1 --offload-arch=gfx908
-#-- For joey,setonix. Use:
-CXXFLAGSADD = -D__HIP_ARCH_GFX90A__=1 --offload-arch=gfx90a
+CPPFLAGS = -I${MPICH_DIR}/include
 
-#=== Additional flags for compilation at specific systems in CSC
-#-- For Lumi. Use:
-#CXXFLAGSADD = -D__HIP_ARCH_GFX90A__=1 --offload-arch=gfx90a
-
-CXXFLAGS = -std=c++11 -fopenmp --rocm-path=${ROCM_PATH} -x hip $(CXXFLAGSADD)
-LFLAGS = -fopenmp --rocm-path=${ROCM_PATH}
-
-INCLUDES  = -I${ROCM_PATH}/include
-LIBRARIES = -L${ROCM_PATH}/lib -lamdhip64
+LDFLAGS = -L${MPICH_DIR}/lib -L${CRAY_MPICH_ROOTDIR}/gtl/lib
+LIBS = -lmpi -lmpi_gtl_hsa
 
 hello_jobstep_hip.x: hello_jobstep_hip.o
-	${COMP} ${LFLAGS} ${LIBRARIES} hello_jobstep_hip.o -o hello_jobstep_hip.x
+	${COMP} ${LDFLAGS} ${LIBS} ${CXXFLAGS} hello_jobstep_hip.o -o hello_jobstep_hip.x
 
 hello_jobstep_hip.o: hello_jobstep_hip.cpp
-	${COMP} ${CXXFLAGS} ${INCLUDES} -c hello_jobstep_hip.cpp
+	${COMP} ${CPPFLAGS} ${CXXFLAGS} -c hello_jobstep_hip.cpp
 

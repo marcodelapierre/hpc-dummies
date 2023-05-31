@@ -2,6 +2,7 @@
 out*
 a.out
 b.out
+*.o
 *.x
 build*/
 core.*

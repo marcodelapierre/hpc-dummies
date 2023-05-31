@@ -5,6 +5,12 @@ Written by Tom Papatheodore at ORNL:
  https://code.ornl.gov/olcf/hello_jobstep
 Adapted by Pawsey Supercomputing Research Centre: 
  https://github.com/PawseySC/hello_jobstep/blob/master/hello_jobstep.cpp
+
+Requirements on Setonix:
+ module swap PrgEnv-gnu/8.3.3 PrgEnv-cray
+ module load rocm/5.0.2
+ module load craype-accel-amd-gfx90a
+ make -f Makefile.hello_jobstep_hip
 ************************************************************************/
 
 #include <stdlib.h>

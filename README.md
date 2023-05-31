@@ -23,4 +23,5 @@ Adopted paradigms include:
 * CUDA
 * HIP
 * Kokkos (including Kernels and RNG)
+* MPI
 

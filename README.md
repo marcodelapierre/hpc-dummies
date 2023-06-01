@@ -7,7 +7,7 @@ Small codes for HPC testing:
 * `saxpy/`: SAXPY codes
 * `saxpy2_profile/`: SAXPY codes for profiling tests (artifical loops)
 * `matmul/`: matrix multiply codes
-* `misc/`: utilities
+* `utils/`: utilities
   * `cpuid`: get CPU ID
   * `xthi`: get task and thread affinities
   * `hello_jobstep_hip`: HIP enabled affinities

@@ -15,4 +15,4 @@
 module load rocm/5.0.2
 module load craype-accel-amd-gfx90a
 
-for n in {1..8} ; do srun   --exact -n $n --gpus-per-node=$n --gpu-bind=closest  ./hello_jobstep_hip.x ; echo " " ; done
+for n in {1..8} ; do srun --exact -n $n --gpus-per-node=$n --gpu-bind=closest  ./hello_jobstep_hip.x ; echo " " ; done

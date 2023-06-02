@@ -13,6 +13,7 @@ Small codes for HPC testing:
   * `affinity/xthi`: get task and thread affinities
   * `affinity/hello_jobstep_hip`: HIP enabled affinities
   * `kokkos/`: Kokkos installation scripts
+  * `osu/`: OSU MPI Benchmark tests
   * Caliper installation script
 * `notes/`: text notes
 

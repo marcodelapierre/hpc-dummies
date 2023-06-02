@@ -2,16 +2,17 @@
 
 Small codes for HPC testing:
 
-* `hello/`: hello worlds
-* `pidarts/`: MonteCarlo Pi codes
-* `saxpy/`: SAXPY codes
-* `saxpy2_profile/`: SAXPY codes for profiling tests (artifical loops)
-* `matmul/`: matrix multiply codes
-* `utils/`: utilities
-  * `cpuid`: get CPU ID
-  * `xthi`: get task and thread affinities
-  * `hello_jobstep_hip`: HIP enabled affinities
-  * Kokkos installation scripts
+* `apps/`:
+  * `hello/`: hello worlds
+  * `pidarts/`: MonteCarlo Pi codes
+  * `saxpy/`: SAXPY codes
+  * `saxpy2_profile/`: SAXPY codes for profiling tests (artifical loops)
+  * `matmul/`: matrix multiply codes
+* `tools/`:
+  * `affinity/cpuid`: get CPU ID
+  * `affinity/xthi`: get task and thread affinities
+  * `affinity/hello_jobstep_hip`: HIP enabled affinities
+  * `kokkos/`: Kokkos installation scripts
   * Caliper installation script
 * `notes/`: text notes
 

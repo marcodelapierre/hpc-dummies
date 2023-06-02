@@ -18,7 +18,6 @@ module load rocm/5.0.2
 module load craype-accel-amd-gfx90a
 module load cmake/3.21.4
 export CRAYPE_LINK_TYPE="dynamic"
-export MPICH_GPU_SUPPORT_ENABLED=1
 
 if [ "$download_kokkos" != "0" ] ; then
  rm -rf kokkos-cpu

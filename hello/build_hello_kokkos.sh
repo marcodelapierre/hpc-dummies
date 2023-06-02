@@ -11,8 +11,7 @@ if [ $target == "setonix-gpu" ] ; then
   module load craype-accel-amd-gfx90a
   module load cmake/3.21.4
   export CRAYPE_LINK_TYPE="dynamic"
-  export MPICH_GPU_SUPPORT_ENABLED=1
-  export cmake_cxx="CC"
+  export cmake_cxx="hipcc"
 elif [ $target == "setonix-cpu" ] ; then
   Kokkos_ROOT="/software/projects/pawsey0001/mdelapierre/setonix/manual/kokkos-setonix-cpu/apps"
   module load cmake/3.21.4

@@ -24,9 +24,10 @@ void saxpy( const float a,
             std::vector<float> const &x, std::vector<float> &y )
 {
   std::transform(std::execution::par,
-                 x.begin(), x.end(), y.begin(), 
-                 y.begin(),
-                 [=](double x, double y) { return a * x + y; });
+    x.begin(), x.end(), y.begin(), 
+    y.begin(),
+    [=](double x, double y) { return a * x + y; }
+  );
 }
 
 

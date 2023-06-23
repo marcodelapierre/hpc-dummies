@@ -25,5 +25,6 @@ Adopted paradigms include:
 * CUDA
 * HIP
 * Kokkos (including Kernels and RNG)
+* C++ STL (STandard Library) parallelism - Nvidia
 * MPI
 

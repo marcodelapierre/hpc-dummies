@@ -1,0 +1,3 @@
+git@github.com:kokkos/kokkos-tutorials
+git@github.com:kokkos/kokkos-openmptarget-examples
+

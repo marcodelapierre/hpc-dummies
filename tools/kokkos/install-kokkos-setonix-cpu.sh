@@ -16,7 +16,7 @@ module load cmake/3.21.4
 export CRAYPE_LINK_TYPE="dynamic"
 
 if [ "$download_kokkos" != "0" ] ; then
- rm -rf kokkos-cpu
+ rm -rf kokkos$suffix
  git clone git@github.com:kokkos/kokkos kokkos$suffix
 fi
 

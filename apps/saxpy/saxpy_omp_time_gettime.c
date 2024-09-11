@@ -45,9 +45,9 @@ const size_t Nsize = N * sizeof(float);
 float* x = (float*)malloc(Nsize);
 float* y = (float*)malloc(Nsize);
 // More definitions
+float err;
 struct timespec start, finish;
 double elapsed;
-float err;
 
 // Fill values
 #pragma omp parallel for

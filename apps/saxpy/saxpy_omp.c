@@ -42,8 +42,9 @@ const size_t Nsize = N * sizeof(float);
 float* x = (float*)malloc(Nsize);
 float* y = (float*)malloc(Nsize);
 // More definitions
-float clocktime, err;
+float err;
 clock_t start, watch;
+double clocktime;
 
 // Fill values
 #pragma omp parallel for
@@ -58,7 +59,7 @@ start = clock();
 saxpy( N, AVAL, x, y );
 // Stop timer
 watch = clock() - start;
-clocktime = ((float)watch)/CLOCKS_PER_SEC;
+clocktime = ((double)watch)/CLOCKS_PER_SEC;
 
 // SAXPY verification
 err = verify_saxpy( tot, N, y );

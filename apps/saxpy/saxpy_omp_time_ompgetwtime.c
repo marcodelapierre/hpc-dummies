@@ -42,7 +42,7 @@ const size_t Nsize = N * sizeof(float);
 float* x = (float*)malloc(Nsize);
 float* y = (float*)malloc(Nsize);
 // More definitions
-float clocktime, err;
+float err;
 double start, watch;
 
 // Fill values

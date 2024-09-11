@@ -39,8 +39,9 @@ const size_t Nsize = N * sizeof(float);
 float* x = (float*)malloc(Nsize);
 float* y = (float*)malloc(Nsize);
 // More definitions
-float clocktime, err;
+float err;
 clock_t start, watch;
+double msec;
 
 // Fill values
 for ( size_t i = 0; i < N; i++ ) {
@@ -54,13 +55,13 @@ start = clock();
 saxpy( N, AVAL, x, y );
 // Stop timer
 watch = clock() - start;
-clocktime = ((float)watch)/CLOCKS_PER_SEC;
+msec = ((double)watch)/CLOCKS_PER_SEC;
 
 // SAXPY verification
 err = verify_saxpy( tot, N, y );
 
 // Print stuff
-printf("N: %i; Err: %f; Clock[ms]: %f;\n", N, err, clocktime*1000.);
+printf("N: %i; Err: %f; Clock[ms]: %f;\n", N, err, msec*1000.);
 
 // Deallocate arrays
 free(y);

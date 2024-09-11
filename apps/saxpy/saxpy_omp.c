@@ -44,7 +44,7 @@ float* y = (float*)malloc(Nsize);
 // More definitions
 float err;
 clock_t start, watch;
-double clocktime;
+double msec;
 
 // Fill values
 #pragma omp parallel for
@@ -59,13 +59,13 @@ start = clock();
 saxpy( N, AVAL, x, y );
 // Stop timer
 watch = clock() - start;
-clocktime = ((double)watch)/CLOCKS_PER_SEC;
+msec = ((double)watch)/CLOCKS_PER_SEC;
 
 // SAXPY verification
 err = verify_saxpy( tot, N, y );
 
 // Print stuff
-printf("N: %i; Err: %f; Clock[ms]: %f;\n", N, err, clocktime*1000.);
+printf("N: %i; Err: %f; Clock[ms]: %f;\n", N, err, msec*1000.);
 
 // Deallocate arrays
 free(y);

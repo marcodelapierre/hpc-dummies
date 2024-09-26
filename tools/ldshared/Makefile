@@ -23,7 +23,7 @@ OBJ_FILES_BIS = $(patsubst %.c, %.o, $(CC_FILES_BIS))
 all: exes libs
 
 .PHONY: exes
-exes: std.x rpath.x ldrunpath.x
+exes: std.x rpath.x ldrunpath.x rpath_bis.x ldrunpath_bis.x rpath_hard.x
 
 .PHONY: libs
 libs: $(FULL_LIB_NAME) bis/$(FULL_LIB_NAME)
@@ -36,6 +36,15 @@ rpath.x: main.o $(FULL_LIB_NAME)
 
 ldrunpath.x: main.o $(FULL_LIB_NAME)
 	LD_RUN_PATH=$(LIB_DIR) $(LD) -o $@ main.o -L$(LIB_DIR) -l$(LIB_NAME)
+
+rpath_bis.x: main.o bis/$(FULL_LIB_NAME)
+	$(LD) -o $@ main.o -L$(LIB_DIR)/bis -Wl,-rpath,$(LIB_DIR)/bis -l$(LIB_NAME)
+
+ldrunpath_bis.x: main.o bis/$(FULL_LIB_NAME)
+	LD_RUN_PATH=$(LIB_DIR)/bis $(LD) -o $@ main.o -L$(LIB_DIR)/bis -l$(LIB_NAME)
+
+rpath_hard.x: main.o $(FULL_LIB_NAME)
+	$(LD) -o $@ main.o -L$(LIB_DIR) -Wl,-rpath,$(LIB_DIR) -Wl,--disable-new-dtags -l$(LIB_NAME)
 
 $(FULL_LIB_NAME): $(LIB_FILE)
 	$(LDCONFIG) -n $(LIB_DIR) ; \

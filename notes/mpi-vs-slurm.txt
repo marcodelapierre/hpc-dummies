@@ -1,0 +1,15 @@
+Tips for building MPI compatible with system Slurm/PMIx/PMI2
+
+OpenMPI:
+* PMIx dependency with version matching Slurm PMIx one
+    * Note that PRRTE also depends on PMIx
+* Use configure option `--with-slurm` to locate Slurm installation
+* Set environment variables in modulefile:
+    * `SLURM_MPI_TYPE=pmix`
+    * `PMIX_MCA_psec=^munge`
+
+Intel MPI:
+* Needs system PMI2
+* Set environment variables in modulefile:
+    * `I_MPI_PMI_LIBRARY=/usr/lib64/libpmi2.so`
+    * `SLURM_MPI_TYPE=pmi2`

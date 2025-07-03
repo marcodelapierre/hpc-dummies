@@ -1,0 +1,6 @@
+SUF = _mkl
+
+CC = icpx
+CCFLAGS += -O3 -march=native -axhost
+LDFLAGS = -Wl,--disable-new-dtags,-rpath,$(MKLROOT)/lib
+LDLIBS = -qmkl=sequential

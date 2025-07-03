@@ -1,0 +1,9 @@
+# csuc cluster
+#AOCL_ROOT = /prod/aocc-5.0.0/aocl/5.0.0
+
+SUF = _aocl
+
+CC = clang++
+CCFLAGS += -O3 -march=native
+LDFLAGS = -Wl,--disable-new-dtags,-rpath,$(AOCL_ROOT)/lib
+LDLIBS = -lblis

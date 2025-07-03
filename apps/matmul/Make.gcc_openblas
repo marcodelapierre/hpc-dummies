@@ -1,0 +1,14 @@
+# my laptop
+OPENBLAS_HOME = /home/mdelapierre/apps/spack/opt/spack/linux-ubuntu24.04-zen3/gcc-13.2.0/openblas-0.3.28-5znjgitwfndvafu4krxygunohyoiwa2r
+# csuc cluster
+#OPENBLAS_HOME = /prod/gcc-13.3.0/libs/openblas/0.3.29
+
+SUF = _openblas
+
+CC = g++
+CCFLAGS += -O3 -funroll-loops -march=native
+# my laptop
+LDFLAGS = -L$(OPENBLAS_HOME)/lib -Wl,--disable-new-dtags,-rpath,$(OPENBLAS_HOME)/lib
+# csuc cluster
+#LDFLAGS = -Wl,--disable-new-dtags,-rpath,$(OPENBLAS_HOME)/lib
+LDLIBS = -lopenblas

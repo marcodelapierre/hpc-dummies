@@ -1,19 +1,22 @@
 # Makefile for matmul_blas.cpp - BLAS implementation
 
-.PHONY: all build run clean
+.PHONY: all buildrun build run clean
 all: build
 
 CCFLAGS = -I../include
 arch = UNKNOWN
 include Make.$(arch)
 
+buildrun: build run
+
 build: matmul_blas$(SUF).x
 
 matmul_blas$(SUF).x: matmul_blas.cpp
-	$(CC) $(CCFLAGS) -o $@ $< $(LDFLAGS) $(LDLIBS)
+	$(CC) $(CCFLAGS) $(LDFLAGS) -o $@ $< $(LDLIBS)
 
 run:
-	time OMP_NUM_THREADS=1 ./matmul_blas$(SUF).x
+	export OMP_NUM_THREADS="1"
+	time ./matmul_blas$(SUF).x
 
 clean:
 	rm -f matmul_blas$(SUF).x

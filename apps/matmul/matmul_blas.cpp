@@ -2,7 +2,11 @@
 #include <cmath>
 #include <ctime>
 #include "my_timer.h"
-#include "cblas.h"
+#ifdef MKL
+ #include "mkl.h"
+#else
+ #include "cblas.h"
+#endif
 
 using namespace std;
 

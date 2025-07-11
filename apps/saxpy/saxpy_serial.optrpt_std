@@ -1,0 +1,101 @@
+Begin optimization report for: verify_saxpy(float, unsigned long, float const*)
+
+LOOP BEGIN at saxpy_serial.cpp (13, 3)
+    remark #15300: LOOP WAS VECTORIZED
+    remark #15305: vectorization support: vector length 4
+    remark #15389: vectorization support: unmasked unaligned unit stride load: [ /home/mdelapierre/gitrepos/hpc-dummies/apps/saxpy/saxpy_serial.cpp (14, 18) ] 
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15476: scalar cost: 9.000000 
+    remark #15477: vector cost: 6.265625 
+    remark #15478: estimated potential speedup: 1.421875 
+    remark #15309: vectorization support: normalized vectorization overhead 1.265625
+    remark #15591: vectorized intrinsic functions: 1
+    remark #15488: --- end vector loop cost summary ---
+    remark #15447: --- begin vector loop memory reference summary ---
+    remark #15450: unmasked unaligned unit stride loads: 1 
+    remark #15474: --- end vector loop memory reference summary ---
+    remark #25587: Loop has reduction
+    remark #15590: vectorization support: add reduction with value type float [saxpy_serial.cpp:14:9]
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (13, 3)
+<Remainder loop for vectorization>
+LOOP END
+=================================================================
+
+Begin optimization report for: saxpy(unsigned long, float, float const*, float*)
+
+LOOP BEGIN at saxpy_serial.cpp (24, 3)
+<Multiversioned v2>
+    remark #15319: Loop was not vectorized: novector directive used
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (24, 3)
+<Multiversioned v1>
+    remark #15300: LOOP WAS VECTORIZED
+    remark #15305: vectorization support: vector length 4
+    remark #15389: vectorization support: unmasked unaligned unit stride load: [ /home/mdelapierre/gitrepos/hpc-dummies/apps/saxpy/saxpy_serial.cpp (25, 16) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride load: [ /home/mdelapierre/gitrepos/hpc-dummies/apps/saxpy/saxpy_serial.cpp (25, 23) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/mdelapierre/gitrepos/hpc-dummies/apps/saxpy/saxpy_serial.cpp (25, 23) ] 
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15476: scalar cost: 9.000000 
+    remark #15477: vector cost: 6.343750 
+    remark #15478: estimated potential speedup: 1.406250 
+    remark #15309: vectorization support: normalized vectorization overhead 0.468750
+    remark #15488: --- end vector loop cost summary ---
+    remark #15447: --- begin vector loop memory reference summary ---
+    remark #15450: unmasked unaligned unit stride loads: 2 
+    remark #15451: unmasked unaligned unit stride stores: 1 
+    remark #15474: --- end vector loop memory reference summary ---
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (24, 3)
+<Remainder loop for vectorization>
+LOOP END
+=================================================================
+
+Begin optimization report for: main
+
+LOOP BEGIN at saxpy_serial.cpp (46, 1)
+    remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (24, 3)
+    remark #15300: LOOP WAS VECTORIZED
+    remark #15305: vectorization support: vector length 4
+    remark #15389: vectorization support: unmasked unaligned unit stride load: [ /home/mdelapierre/gitrepos/hpc-dummies/apps/saxpy/saxpy_serial.cpp (25, 16) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride load: [ /home/mdelapierre/gitrepos/hpc-dummies/apps/saxpy/saxpy_serial.cpp (25, 23) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/mdelapierre/gitrepos/hpc-dummies/apps/saxpy/saxpy_serial.cpp (25, 23) ] 
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15476: scalar cost: 9.000000 
+    remark #15477: vector cost: 6.343750 
+    remark #15478: estimated potential speedup: 1.406250 
+    remark #15309: vectorization support: normalized vectorization overhead 0.000000
+    remark #15570: using scalar loop trip count: 67108864
+    remark #15488: --- end vector loop cost summary ---
+    remark #15447: --- begin vector loop memory reference summary ---
+    remark #15450: unmasked unaligned unit stride loads: 2 
+    remark #15451: unmasked unaligned unit stride stores: 1 
+    remark #15474: --- end vector loop memory reference summary ---
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (13, 3)
+    remark #15300: LOOP WAS VECTORIZED
+    remark #15305: vectorization support: vector length 4
+    remark #15389: vectorization support: unmasked unaligned unit stride load: [ /home/mdelapierre/gitrepos/hpc-dummies/apps/saxpy/saxpy_serial.cpp (14, 18) ] 
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15476: scalar cost: 9.000000 
+    remark #15477: vector cost: 6.265625 
+    remark #15478: estimated potential speedup: 1.421875 
+    remark #15309: vectorization support: normalized vectorization overhead 0.796875
+    remark #15570: using scalar loop trip count: 67108864
+    remark #15591: vectorized intrinsic functions: 1
+    remark #15488: --- end vector loop cost summary ---
+    remark #15447: --- begin vector loop memory reference summary ---
+    remark #15450: unmasked unaligned unit stride loads: 1 
+    remark #15474: --- end vector loop memory reference summary ---
+    remark #25587: Loop has reduction
+    remark #15590: vectorization support: add reduction with value type float [saxpy_serial.cpp:14:9 @[ saxpy_serial.cpp:62:7 ]]
+LOOP END
+=================================================================
+

@@ -1,0 +1,37 @@
+Begin optimization report for: verify_saxpy(float, unsigned long, float const*)
+
+LOOP BEGIN at saxpy_serial.cpp (13, 3)
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (13, 3)
+<Remainder loop>
+LOOP END
+=================================================================
+
+Begin optimization report for: saxpy(unsigned long, float, float const*, float*)
+
+LOOP BEGIN at saxpy_serial.cpp (24, 3)
+<Multiversioned v2>
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (24, 3)
+<Multiversioned v1>
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (24, 3)
+<Remainder loop>
+LOOP END
+=================================================================
+
+Begin optimization report for: main
+
+LOOP BEGIN at saxpy_serial.cpp (46, 1)
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (24, 3)
+LOOP END
+
+LOOP BEGIN at saxpy_serial.cpp (13, 3)
+LOOP END
+=================================================================
+

@@ -2,19 +2,19 @@
 
 # serial with vectorisation off
 CPATH=$(pwd)/../include:$CPATH icpx -O3 -fno-vectorize -fno-slp-vectorize  -qopt-report=3 -qopt-report-phase=vec -o saxpy_serial_novec.x saxpy_serial.cpp
-mv saxpy_serial.optrpt saxpy_serial.optrpt_novec
+mv saxpy_serial.optrpt saxpy_serial_novec.optrpt
 
 # serial with no arch (avx default)
 CPATH=$(pwd)/../include:$CPATH icpx -O3   -qopt-report=3 -qopt-report-phase=vec -o saxpy_serial.x saxpy_serial.cpp 
-mv saxpy_serial.optrpt saxpy_serial.optrpt_std
+mv saxpy_serial.optrpt saxpy_serial_std.optrpt
 
 # serial with avx2 arch
 CPATH=$(pwd)/../include:$CPATH icpx -O3 -march=core-avx2  -qopt-report=3 -qopt-report-phase=vec -o saxpy_serial_avx2.x saxpy_serial.cpp 
-mv saxpy_serial.optrpt saxpy_serial.optrpt_avx2
+mv saxpy_serial.optrpt saxpy_serial_avx2.optrpt
 
 # serial with avx512 arch
 CPATH=$(pwd)/../include:$CPATH icpx -O3 -march=common-avx512  -qopt-report=3 -qopt-report-phase=vec -o saxpy_serial_avx512.x saxpy_serial.cpp
-mv saxpy_serial.optrpt saxpy_serial.optrpt_avx512
+mv saxpy_serial.optrpt saxpy_serial_avx512.optrpt
 
 
 # serial with aligned allocation and avx2 arch

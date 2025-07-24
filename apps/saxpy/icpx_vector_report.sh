@@ -19,6 +19,7 @@ mv saxpy_serial.optrpt saxpy_serial.optrpt_avx512
 
 # serial with aligned allocation and avx2 arch
 CPATH=$(pwd)/../include:$CPATH icpx -O3 -march=core-avx2  -qopt-report=3 -qopt-report-phase=vec -o saxpy_serial_aligned_avx2.x saxpy_serial_aligned.cpp
+mv saxpy_serial_aligned.optrpt saxpy_serial_aligned_avx2.optrpt
 
 
 # avx2 intrinsics with aligned allocation

@@ -19,8 +19,9 @@ float verify_saxpy( const float tot, const size_t n, const float* const y )
 
 // Perform SAXPY
 void saxpy( const size_t n, const float a, 
-            const float* const x, float* const y )
+            const float* __restrict__ const x, float* __restrict__ const y )
 {
+  # pragma vector aligned
   for ( size_t i = 0; i < n; i++ ) {
     y[i] = a * x[i] + y[i];
   }

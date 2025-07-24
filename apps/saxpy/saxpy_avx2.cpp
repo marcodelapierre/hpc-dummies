@@ -47,8 +47,12 @@ const float YVAL = rand() % 1000000;
 const float AVAL = rand() % 1000000;
 const float tot = AVAL * XVAL + YVAL;
 // Allocate arrays
-float* x = (float*)aligned_alloc(32, N * sizeof(float));
-float* y = (float*)aligned_alloc(32, N * sizeof(float));
+//float* x = (float*)aligned_alloc(sizeof(__m256), N * sizeof(float));
+//float* y = (float*)aligned_alloc(sizeof(__m256), N * sizeof(float));
+float* x;
+float* y;
+posix_memalign((void**)&x, sizeof(__m256), N * sizeof(float));
+posix_memalign((void**)&y, sizeof(__m256), N * sizeof(float));
 // More definitions
 float clocktime, err;
 
@@ -78,8 +82,10 @@ cout << "Clock[ms]: " << clocktime*1000. << "; ";
 cout << endl;
 
 // Deallocate arrays
-delete [] y;
-delete [] x;
+//delete [] y;
+//delete [] x;
+free(y);
+free(x);
 
 return 0;
 }
